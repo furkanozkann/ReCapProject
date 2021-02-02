@@ -16,6 +16,16 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        public void Add(Car car)
+        {
+            _carDal.Add(car);
+        }
+
+        public void Delete(Car car)
+        {
+            _carDal.Delete(car);
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
@@ -28,11 +38,20 @@ namespace Business.Concrete
             
         }
 
+        public List<Car> GetById(int car)
+        {
+            return _carDal.GetById(car);
+        }
 
         public List<Color> GetColorName(int color)
         {
             return _carDal.GetByColorId(color);
 
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
         }
     }
 }
