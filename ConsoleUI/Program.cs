@@ -60,16 +60,17 @@ namespace ConsoleUI
 
             Console.WriteLine("------DTO Deneme 1 - 2----------");
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var color in carManager.GetCarsDetails())
+            foreach (var color in carManager.GetCarsDetails().Data)
             {
                 Console.WriteLine("{0} / {1} / {2} / {3}", color.CarId, color.BrandName,color.ColorName,color.DailyPrice);
             }
+            Console.WriteLine(carManager.GetById(1).Data.Description);
             //carManager.Update(new Car { CarId = 2, BrandId = 2, ColorId = 2 });
 
             Console.WriteLine("--------Color Manager Test----------");
 
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorId + " / " + color.ColorName );
             }
@@ -78,12 +79,35 @@ namespace ConsoleUI
             Console.WriteLine("------Brand Manager Test------");
 
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandId + " / " + brand.BrandName);
             }
             //brandManager.Delete(new Brand { BrandId = 1002, BrandName = "Tofaş" });
 
+            Console.WriteLine("------User Manager Test------");
+
+            UserManager userManager = new UserManager(new EfUserDal());
+            foreach(var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine(user.FirstName + " / " + user.LastName + " / " + user.Email);
+            }
+
+            Console.WriteLine("------Customer Manager Test------");
+
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            foreach (var customer in customerManager.GetAll().Data)
+            {
+                Console.WriteLine(customer.CustomerId + " / " + customer.UserId + " / " + customer.CompanyName);
+            }
+
+            foreach (var customer in customerManager.GetCustomersDetails().Data)
+            {
+                Console.WriteLine(customer.CustomerId + " / " + customer.UserName + " / " + customer.CompanyName );
+            }
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //Console.WriteLine(rentalManager.Add(new Rental { CarId = 1, CustomerId = 1 }).Message);
             Console.ReadLine();
         }
     }
